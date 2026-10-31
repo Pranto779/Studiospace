@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -13,7 +14,9 @@ import {
   Wallet,
 } from "lucide-react";
 import { toast } from "sonner";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { authClient } from "../lib/auth-client";
+
 
 const amenitiesOptions = [
   "WiFi",
@@ -27,6 +30,12 @@ const amenitiesOptions = [
 ];
 
 export default function AddStudioPage() {
+  const router = useRouter();
+
+  const { data: session, isPending } = authClient.useSession();
+
+  const userEmail = session?.user?.email;
+
   const [category, setCategory] = useState("");
   const [amenities, setAmenities] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
@@ -42,6 +51,17 @@ export default function AddStudioPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (isPending) {
+      toast.error("Please wait while your session loads.");
+      return;
+    }
+
+    if (!userEmail) {
+      toast.error("Please sign in before publishing a studio.");
+      router.push("/sign-in");
+      return;
+    }
+
     const form = e.currentTarget;
     const formData = new FormData(form);
 
@@ -49,10 +69,10 @@ export default function AddStudioPage() {
       ...Object.fromEntries(formData.entries()),
       category,
       amenities,
+      email: userEmail,
       hourlyRate: Number(formData.get("hourlyRate")),
       securityDeposit: Number(formData.get("securityDeposit")),
       maxCapacity: Number(formData.get("maxCapacity")),
-      
     };
 
     try {
@@ -77,13 +97,14 @@ export default function AddStudioPage() {
       form.reset();
       setCategory("");
       setAmenities([]);
+
+      router.push("/my-listings");
     } catch (error) {
       console.error(error);
       toast.error("Failed to publish studio.");
     } finally {
       setLoading(false);
     }
-redirect('/my-listings')
   };
 
   return (
@@ -340,12 +361,16 @@ redirect('/my-listings')
           {/* Submit Button */}
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || isPending}
             className="group mt-8 flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-white font-semibold text-black transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            {loading ? "Publishing..." : "Publish Studio"}
+            {loading
+              ? "Publishing..."
+              : isPending
+                ? "Loading session..."
+                : "Publish Studio"}
 
-            {!loading && (
+            {!loading && !isPending && (
               <ArrowRight
                 size={18}
                 className="transition-transform group-hover:translate-x-1"
