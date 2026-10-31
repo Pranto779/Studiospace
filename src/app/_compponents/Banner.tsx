@@ -53,7 +53,7 @@ export default function Banner() {
       >
         {slides.map((slide) => (
           <SwiperSlide key={slide.title}>
-            <div className="relative h-[65vh] min-h-[500px] overflow-hidden rounded-[32px] border border-white/10">
+            <div className="relative h-[80vh] min-h-[500px] overflow-hidden rounded-[32px] border border-white/10">
               
               {/* Image */}
               <Image
@@ -88,19 +88,14 @@ export default function Banner() {
                   </p>
 
                   <div className="mt-10 flex flex-wrap gap-4">
-                    <Link
-                      href="/studios"
-                      className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 font-medium text-black transition hover:bg-zinc-200"
-                    >
-                      Explore Studios
-                      <ArrowRight size={18} />
-                    </Link>
+                    
 
                     <Link
                       href="/studios"
-                      className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-black/20 px-6 py-3 font-medium text-white backdrop-blur-md transition hover:bg-white/10"
+                      className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-black/20 px-6 py-3 mb-8 font-medium text-white backdrop-blur-md transition hover:bg-white/10"
                     >
-                      Host Your Space
+                     Explore Studios
+                      <ArrowRight size={18} />
                     </Link>
                   </div>
                 </div>

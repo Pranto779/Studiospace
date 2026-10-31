@@ -4,81 +4,24 @@ import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Star, ArrowRight } from "lucide-react";
 
-interface Studio {
+export interface Istudio {
   _id: string;
-  title: string;
+  name: string;
   category: string;
   image: string;
-  rating: number;
   location: string;
-  hourlyRate: number;
+  hourlyRate: string | number;
+  description: string;
+  amenities: string;
 }
 
-export default function FeaturedStudios() {
-  // replace with API data later
-  const studios: Studio[] = [
-    {
-      _id: "1",
-      title: "Downtown Photography Loft",
-      category: "Photo Studio",
-      image:
-        "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1400&auto=format&fit=crop",
-      rating: 4.9,
-      location: "New York",
-      hourlyRate: 45,
-    },
-    {
-      _id: "2",
-      title: "Premium Podcast Lounge",
-      category: "Podcast Room",
-      image:
-        "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1400&auto=format&fit=crop",
-      rating: 4.8,
-      location: "Los Angeles",
-      hourlyRate: 55,
-    },
-    {
-      _id: "3",
-      title: "Creative Music Suite",
-      category: "Music Suite",
-      image:
-        "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1400&auto=format&fit=crop",
-      rating: 5.0,
-      location: "Chicago",
-      hourlyRate: 68,
-    },
-    {
-      _id: "4",
-      title: "Production Film Stage",
-      category: "Sound Stage",
-      image:
-        "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1400&auto=format&fit=crop",
-      rating: 4.7,
-      location: "Miami",
-      hourlyRate: 79,
-    },
-    {
-      _id: "5",
-      title: "Minimal Creator Workshop",
-      category: "Workshop",
-      image:
-        "https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=1400&auto=format&fit=crop",
-      rating: 4.9,
-      location: "Seattle",
-      hourlyRate: 39,
-    },
-    {
-      _id: "6",
-      title: "Luxury Content Studio",
-      category: "Photo Studio",
-      image:
-        "https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=1400&auto=format&fit=crop",
-      rating: 5.0,
-      location: "Austin",
-      hourlyRate: 62,
-    },
-  ];
+interface Featureprop {
+  studios: Istudio[];
+}
 
+export default function FeaturedStudios({studios}:Featureprop) {
+  console.log(studios);
+  
   return (
     <section className="bg-[#080808] py-24 text-white">
       <div className="mx-auto max-w-7xl px-6">
@@ -121,7 +64,7 @@ export default function FeaturedStudios() {
               <div className="relative h-64 overflow-hidden">
                 <Image
                   src={studio.image}
-                  alt={studio.title}
+                  alt={studio.name}
                   fill
                   className="object-cover transition duration-700 group-hover:scale-[1.03]"
                 />
@@ -136,14 +79,14 @@ export default function FeaturedStudios() {
                 {/* Rating */}
                 <div className="absolute right-4 top-4 flex items-center gap-1 rounded-full border border-white/10 bg-black/40 px-3 py-1 backdrop-blur-md">
                   <Star size={14} fill="white" />
-                  <span className="text-xs">{studio.rating}</span>
+                  <span className="text-xs">{studio.description}</span>
                 </div>
               </div>
 
               {/* Content */}
               <div className="p-6">
                 <h3 className="text-xl font-semibold">
-                  {studio.title}
+                  {studio.amenities}
                 </h3>
 
                 <div className="mt-4 flex items-center gap-2 text-zinc-400">
