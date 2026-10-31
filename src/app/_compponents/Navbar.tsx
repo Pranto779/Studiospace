@@ -30,7 +30,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
 
-  const { data: session } = authClient.useSession();
+  const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
 
   const handleLogout = async () => {
@@ -40,6 +40,28 @@ export default function Navbar() {
   };
 
   const avatarLetter = user?.name?.trim()?.charAt(0)?.toUpperCase() || "U";
+
+  // Profile Loading Skeleton
+  const UserSkeleton = ({
+    size = "normal",
+  }: {
+    size?: "normal" | "small";
+  }) => (
+    <div className="flex animate-pulse items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.03] py-1.5 pl-1.5 pr-3">
+      <div
+        className={`shrink-0 rounded-full bg-white/10 ${
+          size === "small" ? "h-8 w-8" : "h-10 w-10"
+        }`}
+      />
+
+      {size === "normal" && (
+        <>
+          <div className="h-3 w-20 rounded bg-white/10" />
+          <div className="h-3 w-3 rounded-full bg-white/10" />
+        </>
+      )}
+    </div>
+  );
 
   // User avatar
   const UserAvatar = ({ size = "normal" }: { size?: "normal" | "small" }) => (
@@ -52,6 +74,8 @@ export default function Navbar() {
         <Image
           src={user.image}
           alt={user.name || "User"}
+          height={50}
+          width={50}
           className="h-full w-full object-cover"
         />
       ) : (
@@ -154,7 +178,9 @@ export default function Navbar() {
 
           {/* Desktop Actions */}
           <div className="hidden items-center gap-5 sm:flex">
-            {user ? (
+            {isPending ? (
+              <UserSkeleton />
+            ) : user ? (
               <div className="relative">
                 <button
                   type="button"
@@ -203,7 +229,9 @@ export default function Navbar() {
 
           {/* Mobile Actions */}
           <div className="flex items-center gap-3 sm:hidden">
-            {user ? (
+            {isPending ? (
+              <UserSkeleton size="small" />
+            ) : user ? (
               <div className="relative">
                 <button
                   type="button"
@@ -274,4 +302,3 @@ export default function Navbar() {
     </header>
   );
 }
-
