@@ -13,6 +13,7 @@ import {
   Wallet,
 } from "lucide-react";
 import { toast } from "sonner";
+import { redirect } from "next/navigation";
 
 const amenitiesOptions = [
   "WiFi",
@@ -51,6 +52,7 @@ export default function AddStudioPage() {
       hourlyRate: Number(formData.get("hourlyRate")),
       securityDeposit: Number(formData.get("securityDeposit")),
       maxCapacity: Number(formData.get("maxCapacity")),
+      
     };
 
     try {
@@ -81,6 +83,7 @@ export default function AddStudioPage() {
     } finally {
       setLoading(false);
     }
+redirect('/my-listings')
   };
 
   return (
