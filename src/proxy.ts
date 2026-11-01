@@ -1,11 +1,19 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
-// This function can be marked `async` if using `await` inside
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { getSessionCookie } from "better-auth/cookies";
+
 export function proxy(request: NextRequest) {
-  return NextResponse.redirect(new URL('/signin', request.url))
+  const sessionCookie = getSessionCookie(request);
+
+  if (!sessionCookie) {
+    const signInUrl = new URL("/signin", request.url);
+    signInUrl.searchParams.set("callbackUrl", request.nextUrl.pathname);
+    return NextResponse.redirect(signInUrl);
+  }
+
+  return NextResponse.next();
 }
-// Alternatively, you can use a default export:
-// export default function proxy(request: NextRequest) { ... }
+
 export const config = {
   matcher: [
     "/my-listings/:path*",
@@ -13,6 +21,6 @@ export const config = {
     "/booking/:path*",
     "/add-studio",
     "/dashboard/:path*",
-    '/studios/:path*'
+    "/studios/:path*",
   ],
 };
