@@ -156,15 +156,15 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/[0.08] bg-black/95 text-white backdrop-blur-xl">
-      <div className="mx-auto max-w-[1600px] px-5 sm:px-8 lg:px-12">
-        <nav className="flex h-[82px] items-center justify-between">
+      <div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8 xl:px-12">
+        <nav className="flex h-16 items-center justify-between sm:h-[72px]">
           {/* Logo */}
           <Link
             href="/"
             onClick={() => setIsOpen(false)}
             className="group flex items-center gap-3"
           >
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 bg-white/[0.04] transition-all duration-300 group-hover:border-white/40 group-hover:bg-white/[0.08]">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 bg-white/[0.04] transition-all duration-300 group-hover:border-white/40 group-hover:bg-white/[0.08] sm:h-11 sm:w-11">
               <Aperture
                 size={25}
                 strokeWidth={1.6}
@@ -173,20 +173,20 @@ export default function Navbar() {
             </div>
 
             <div>
-              <h1 className="text-[24px] font-bold leading-none tracking-[-1.5px] sm:text-[27px]">
+              <h1 className="text-[21px] font-bold leading-none tracking-[-1px] sm:text-[24px]">
                 STUDIO
                 <span className="font-light text-zinc-400">SPACE</span>
                 <span>.</span>
               </h1>
 
-              <p className="mt-1.5 text-[8px] font-medium uppercase tracking-[0.35em] text-zinc-400">
+              <p className="mt-1.5 hidden text-[8px] font-medium uppercase tracking-[0.35em] text-zinc-400 min-[380px]:block">
                 Create Without Limits
               </p>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden items-center gap-1 rounded-full border border-white/[0.08] bg-white/[0.03] p-1.5 lg:flex">
+          <div className="hidden items-center gap-1 rounded-full border border-white/[0.08] bg-white/[0.03] p-1.5 xl:flex">
             {navLinks.map(({ name, href, icon: Icon }) => (
               <Link
                 key={name}
@@ -208,7 +208,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Actions */}
-          <div className="hidden items-center gap-5 sm:flex">
+          <div className="hidden items-center gap-5 xl:flex">
             {isPending ? (
               <UserSkeleton />
             ) : user ? (
@@ -259,7 +259,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Actions */}
-          <div className="flex items-center gap-3 sm:hidden">
+          <div className="flex items-center gap-2 sm:gap-3 xl:hidden">
             {isPending ? (
               <UserSkeleton size="small" />
             ) : user ? (
@@ -278,12 +278,20 @@ export default function Navbar() {
                 {profileOpen && <ProfileMenu />}
               </div>
             ) : (
-              <Link
-                href="/signup"
-                className="rounded-full bg-white px-4 py-2.5 text-xs font-semibold text-black transition-colors hover:bg-zinc-200"
-              >
-                Register
-              </Link>
+              <>
+                <Link
+                  href="/signin"
+                  className="px-1 py-2 text-xs font-medium text-zinc-300 hover:text-white sm:px-2"
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/signup"
+                  className="rounded-full bg-white px-2.5 py-2.5 text-xs font-semibold text-black transition-colors hover:bg-zinc-200 sm:px-4"
+                >
+                  Register
+                </Link>
+              </>
             )}
 
             <button
@@ -300,7 +308,7 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         <div
-          className={`grid transition-all duration-300 ease-in-out lg:hidden ${
+          className={`grid transition-all duration-300 ease-in-out xl:hidden ${
             isOpen
               ? "grid-rows-[1fr] pb-5 opacity-100"
               : "grid-rows-[0fr] pb-0 opacity-0"
@@ -326,6 +334,7 @@ export default function Navbar() {
                   />
                 </Link>
               ))}
+
             </div>
           </div>
         </div>

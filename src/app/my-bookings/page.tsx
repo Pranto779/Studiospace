@@ -13,10 +13,9 @@ import {
   Plus,
   RefreshCw,
   User,
-  X,
 } from "lucide-react";
-import { toast } from "sonner";
 import { authClient } from "../lib/auth-client";
+import CancelBookingButton from "../_compponents/CancelBookingButton";
 
 type BookingStatus = "Pending" | "Confirmed" | "Completed" | "Cancelled";
 
@@ -160,8 +159,6 @@ export default function MyBookingsPage() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [cancellingId, setCancellingId] = useState<string | null>(null);
-
   useEffect(() => {
     if (!isPending && !email) router.replace("/signin");
   }, [email, isPending, router]);
@@ -213,27 +210,6 @@ export default function MyBookingsPage() {
 
     void fetchBookings();
   }, [email, isPending]);
-
-  const cancelBooking = async (bookingId: string) => {
-    setCancellingId(bookingId);
-    try {
-      const response = await fetch(
-        `http://localhost:8000/mybooking/${bookingId}`,
-        {
-          method: "DELETE",
-        }
-      );
-      if (!response.ok) throw new Error("Unable to cancel booking");
-      setBookings((current) =>
-        current.filter((booking) => booking._id !== bookingId)
-      );
-      toast.success("Booking cancelled successfully.");
-    } catch {
-      toast.error("Could not cancel this booking.");
-    } finally {
-      setCancellingId(null);
-    }
-  };
 
   if (isPending || (!email && loading)) {
     return (
@@ -355,15 +331,14 @@ export default function MyBookingsPage() {
                       <p className="mt-1 text-2xl font-semibold">${booking.totalPrice}</p>
                     </div>
                     {(booking.status === "Pending" || booking.status === "Confirmed") && (
-                      <button
-                        type="button"
-                        disabled={cancellingId === booking._id}
-                        onClick={() => void cancelBooking(booking._id)}
-                        className="flex h-11 items-center gap-2 rounded-xl border border-red-500/20 bg-red-500/[0.06] px-4 text-sm font-medium text-red-400 hover:bg-red-500/15 disabled:opacity-50"
-                      >
-                        <X size={16} />
-                        {cancellingId === booking._id ? "Cancelling..." : "Cancel Booking"}
-                      </button>
+                      <CancelBookingButton
+                        bookingId={booking._id}
+                        onCancelled={(bookingId) =>
+                          setBookings((current) =>
+                            current.filter((booking) => booking._id !== bookingId)
+                          )
+                        }
+                      />
                     )}
                   </div>
                 </div>

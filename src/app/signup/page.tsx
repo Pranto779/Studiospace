@@ -22,7 +22,15 @@ export default function SignupPage() {
   const router = useRouter();
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
+const handleGoogleSignin = async () => {
+    const { error } = await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "/",
+    });
+    if (error) {
+      toast.error(error.message);
+    }
+  };
   const passwordRules = [
     {
       valid: /[A-Z]/.test(password),
@@ -334,6 +342,7 @@ export default function SignupPage() {
             {/* Social Buttons: UI Only */}
         <div className="grid grid-cols-1">
             <button
+          onClick={handleGoogleSignin}
               type="button"
               className="flex h-11 items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.025] text-sm font-medium text-zinc-300 transition-all duration-300 hover:border-white/25 hover:bg-white/[0.07]"
             >
