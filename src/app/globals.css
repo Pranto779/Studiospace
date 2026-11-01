@@ -121,10 +121,59 @@
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
+
   html {
     @apply font-sans;
+    background: #080808;
+    scroll-behavior: smooth;
   }
+
+  body {
+    @apply bg-background text-foreground;
+    background: #080808;
+    color: #f4f4f5;
+    color-scheme: dark;
+  }
+
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    @apply outline-none;
+  }
+
+  a,
+  button {
+    transition-property: color, background-color, border-color, opacity, transform, box-shadow;
+    transition-duration: 200ms;
+  }
+
+  img {
+    user-select: none;
+  }
+}
+
+::selection {
+  background: rgba(139, 92, 246, 0.55);
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #080808;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 3px solid #080808;
+  border-radius: 999px;
+  background: #3f3f46;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #52525b;
 }

@@ -19,14 +19,12 @@ interface Featureprop {
   studios: Istudio[];
 }
 
-export default function FeaturedStudios({studios}:Featureprop) {
-  console.log(studios);
-  
+export default function FeaturedStudios({ studios }: Featureprop) {
   return (
-    <section className="bg-[#080808] py-24 text-white">
+    <section className="bg-[#080808] py-20 text-white">
       <div className="mx-auto max-w-7xl px-6">
         {/* Heading */}
-        <div className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+        <div className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
             <p className="mb-3 text-xs uppercase tracking-[0.25em] text-zinc-500">
               Featured Studios
@@ -54,19 +52,19 @@ export default function FeaturedStudios({studios}:Featureprop) {
         </div>
 
         {/* Grid */}
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {studios.map((studio) => (
             <article
               key={studio._id}
-              className="group overflow-hidden rounded-[28px] border border-white/10 bg-[#111111] transition-all duration-300 hover:border-white/20"
+              className="group overflow-hidden rounded-[26px] border border-white/10 bg-[#111111] transition duration-300 hover:-translate-y-1 hover:border-white/25 hover:shadow-2xl hover:shadow-black/40"
             >
               {/* Image */}
-              <div className="relative h-64 overflow-hidden">
+              <div className="relative h-52 overflow-hidden">
                 <Image
                   src={studio.image}
                   alt={studio.name}
                   fill
-                  className="object-cover transition duration-700 group-hover:scale-[1.03]"
+                  className="object-cover transition duration-700 group-hover:scale-105"
                 />
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
@@ -79,22 +77,22 @@ export default function FeaturedStudios({studios}:Featureprop) {
                 {/* Rating */}
                 <div className="absolute right-4 top-4 flex items-center gap-1 rounded-full border border-white/10 bg-black/40 px-3 py-1 backdrop-blur-md">
                   <Star size={14} fill="white" />
-                  <span className="text-xs">{studio.description}</span>
+                  <span className="line-clamp-1 max-w-20 text-xs">{studio.category}</span>
                 </div>
               </div>
 
               {/* Content */}
-              <div className="p-6">
+              <div className="p-5">
                 <h3 className="text-xl font-semibold">
-                  {studio.amenities}
+                  {studio.name}
                 </h3>
 
-                <div className="mt-4 flex items-center gap-2 text-zinc-400">
+                <div className="mt-3 flex items-center gap-2 text-zinc-400">
                   <MapPin size={16} />
                   <span className="text-sm">{studio.location}</span>
                 </div>
 
-                <div className="mt-5 flex items-center justify-between">
+                <div className="mt-3 flex items-center justify-between">
                   <div>
                     <p className="text-xs text-zinc-500">
                       Hourly Rate

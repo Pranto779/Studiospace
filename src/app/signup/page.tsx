@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   Aperture,
   Eye,
@@ -18,6 +19,7 @@ import { authClient } from "../lib/auth-client";
 import { toast } from "sonner";
 
 export default function SignupPage() {
+  const router = useRouter();
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
@@ -61,13 +63,9 @@ export default function SignupPage() {
       return;
     }
 
-  
-   
-
     toast.success("Registration successful!");
 
-   
-    window.location.href = "/signin";
+    router.push("/signin");
   } catch (error) {
     console.error(error);
     toast.error("Something went wrong. Please try again.");

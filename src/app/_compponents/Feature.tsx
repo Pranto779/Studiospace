@@ -8,7 +8,6 @@ const Feature = async () => {
   }
 
   const data: Istudio[] = await res.json();
-console.log(data.length);
 
   return <FeaturedStudios studios={data} />;
 };

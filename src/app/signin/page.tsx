@@ -35,10 +35,10 @@ const handleSignin = async (e: React.FormEvent<HTMLFormElement>) => {
   }
 
   try {
-    const { data, error } = await authClient.signIn.email({
+    const { error } = await authClient.signIn.email({
       email: Userdata.email,
       password: Userdata.password,
-    callbackURL: "/",
+      callbackURL: "/",
     });
 
     if (error) {

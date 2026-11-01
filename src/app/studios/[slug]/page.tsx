@@ -5,14 +5,10 @@ import {
   ArrowLeft,
   CheckCircle2,
   CalendarDays,
-  Wifi,
   ArrowRight,
   Users,
   ShieldCheck,
   DollarSign,
-  X,
-  ChevronLeft,
-  ChevronRight,
   Star,
   UserRound,
   ImageIcon,
@@ -427,4 +423,3 @@ function Specification({
 }
 
 export default DetailsPage;
-

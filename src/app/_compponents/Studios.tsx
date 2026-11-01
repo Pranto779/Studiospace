@@ -42,20 +42,10 @@ export default function StudiosPage({ studios }: Props) {
           {studios.map((studio) => (
             <article
               key={studio._id}
-              className="
-                group
-                overflow-hidden
-                rounded-[28px]
-                border
-                border-white/10
-                bg-[#111111]
-                transition-all
-                duration-300
-                hover:border-white/20
-              "
+              className="group overflow-hidden rounded-[26px] border border-white/10 bg-[#111111] transition duration-300 hover:-translate-y-1 hover:border-white/25 hover:shadow-2xl hover:shadow-black/40"
             >
               {/* Image */}
-              <div className="relative h-50 overflow-hidden">
+              <div className="relative h-40 overflow-hidden">
                 <Image
                   src={studio.image}
                   alt={studio.name}
@@ -66,22 +56,25 @@ export default function StudiosPage({ studios }: Props) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
 
                 {/* Category */}
-                <div className="absolute left-4 top-4 rounded-full border border-white/10 bg-black/40 px-3 py-1 text-xs backdrop-blur-md">
+                <div className="absolute left-4 top-4 rounded-full border border-white/15 bg-black/50 px-3 py-1.5 text-xs backdrop-blur-md">
                   {studio.category}
+                </div>
+                <div className="absolute bottom-4 right-4 rounded-xl bg-black/60 px-3 py-2 text-sm font-semibold backdrop-blur-md">
+                  ${studio.hourlyRate}/hr
                 </div>
               </div>
 
               {/* Content */}
-              <div className="p-6">
-                <h2 className="text-xl font-semibold">
+              <div className="flex flex-1 flex-col p-5">
+                <h2 className="text-xl font-semibold transition group-hover:text-zinc-200">
                   {studio.name}
                 </h2>
 
-                <p className="mt-3 line-clamp-2 text-sm leading-6 text-zinc-500">
+                <p className="mt-2 line-clamp-1 text-sm leading-6 text-zinc-500">
                   {studio.description}
                 </p>
 
-                <div className="mt-4 flex items-center gap-2 text-zinc-400">
+                <div className="mt-2 flex items-center gap-2 text-zinc-400">
                   <MapPin size={16} />
                   <span className="text-sm">
                     {studio.location}
@@ -89,15 +82,15 @@ export default function StudiosPage({ studios }: Props) {
                 </div>
 
                 {/* Amenities */}
-                <div className="mt-4">
-                  <p className="line-clamp-1 text-sm text-zinc-500">
+                <div className="mt-3">
+                  <p className="line-clamp-1 rounded-lg bg-white/[0.03] px-3  text-sm text-zinc-500">
                     {studio.amenities}
                   </p>
                 </div>
 
-                <div className="mt-6 flex items-center justify-between">
+                <div className="mt-3 flex items-center justify-between">
                   <div>
-                    <p className="text-xs text-zinc-500">
+                    <p className="text-xs uppercase tracking-[0.16em] text-zinc-500">
                       Starting Price
                     </p>
 

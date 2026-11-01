@@ -7,12 +7,12 @@ import { FaInstagram, FaLinkedin, FaYoutube } from "react-icons/fa";
 export default function Footer() {
   return (
     <footer className="border-t border-white/10 bg-[#080808] text-white">
-      <div className="mx-auto max-w-7xl px-6 py-12">
+      <div className="mx-auto max-w-7xl px-6 py-10">
         <div className="grid gap-10 lg:grid-cols-3">
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03]">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03]">
                 <Aperture size={24} strokeWidth={1.5} />
               </div>
 

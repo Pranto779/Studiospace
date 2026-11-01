@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
         hostname: '**',
       
       },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '8000',
+      },
     ],
   },
   experimental: {

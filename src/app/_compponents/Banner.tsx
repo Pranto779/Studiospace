@@ -36,7 +36,7 @@ export default function Banner() {
   ];
 
   return (
-    <section className="bg-[#080808] px-4 pb-8 pt-4 md:px-6">
+    <section className="bg-[#080808] px-4 pb-10 pt-4 md:px-6">
       <Swiper
         modules={[Autoplay, Pagination, EffectFade]}
         effect="fade"
@@ -49,11 +49,11 @@ export default function Banner() {
         pagination={{
           clickable: true,
         }}
-        className="overflow-hidden rounded-[32px]"
+        className="overflow-hidden rounded-[26px]"
       >
         {slides.map((slide) => (
           <SwiperSlide key={slide.title}>
-            <div className="relative h-[80vh] min-h-[500px] overflow-hidden rounded-[32px] border border-white/10">
+            <div className="relative h-[68vh] min-h-[480px] max-h-[720px] overflow-hidden rounded-[26px] border border-white/10">
               
               {/* Image */}
               <Image
@@ -65,34 +65,34 @@ export default function Banner() {
               />
 
               {/* Dark Overlay */}
-              <div className="absolute inset-0 bg-black/25" />
+              <div className="absolute inset-0 bg-black/35" />
 
               {/* Text Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-transparent" />
 
               {/* Content */}
               <div className="relative z-10 flex h-full items-center">
                 <div className="max-w-7xl px-8 md:px-14">
-                  <div className="mb-5 inline-flex items-center rounded-full border border-white/15 bg-black/20 px-4 py-2 backdrop-blur-md">
+                  <div className="mb-5 inline-flex items-center rounded-full border border-white/15 bg-black/25 px-4 py-2 backdrop-blur-md">
                     <span className="text-xs uppercase tracking-[0.3em] text-zinc-200">
                       StudioSpace
                     </span>
                   </div>
 
-                  <h1 className="max-w-4xl text-5xl font-semibold tracking-[-2px] text-white md:text-7xl">
+                  <h1 className="max-w-3xl text-4xl font-semibold tracking-[-0.04em] text-white sm:text-5xl md:text-6xl">
                     {slide.title}
                   </h1>
 
-                  <p className="mt-6 max-w-2xl text-base leading-8 text-zinc-200 md:text-lg">
+                  <p className="mt-5 max-w-xl text-base leading-7 text-zinc-200 md:text-lg">
                     {slide.description}
                   </p>
 
-                  <div className="mt-10 flex flex-wrap gap-4">
+                  <div className="mt-7 flex flex-wrap gap-4">
                     
 
                     <Link
                       href="/studios"
-                      className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-black/20 px-6 py-3 mb-8 font-medium text-white backdrop-blur-md transition hover:bg-white/10"
+                      className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-black hover:bg-zinc-200"
                     >
                      Explore Studios
                       <ArrowRight size={18} />
@@ -103,7 +103,7 @@ export default function Banner() {
 
               {/* Bottom Glass Stats */}
               <div className="absolute bottom-5 left-5 right-5 hidden md:flex">
-                <div className="grid w-full grid-cols-3 rounded-2xl border border-white/10 bg-black/20 p-5 backdrop-blur-xl">
+                <div className="grid w-full grid-cols-3 rounded-2xl border border-white/10 bg-black/30 p-4 backdrop-blur-xl">
                   <div>
                     <p className="text-2xl font-semibold text-white">
                       2K+

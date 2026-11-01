@@ -50,10 +50,10 @@ export default function StudioCategories() {
   ];
 
   return (
-    <section className="bg-[#080808] py-24 text-white">
+    <section className="bg-[#080808] py-20 text-white">
       <div className="mx-auto max-w-7xl px-6">
         {/* Heading */}
-        <div className="mb-14 text-center">
+        <div className="mb-10 text-center">
           <p className="mb-3 text-xs uppercase tracking-[0.25em] text-zinc-500">
             Browse Categories
           </p>
@@ -73,7 +73,7 @@ export default function StudioCategories() {
         </div>
 
         {/* Categories */}
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-5">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {categories.map((category) => {
             const Icon = category.icon;
 
@@ -81,17 +81,17 @@ export default function StudioCategories() {
               <Link
                 key={category.title}
                 href={category.href}
-                className="group overflow-hidden rounded-[28px] border border-white/10 bg-[#111111]"
+                className="group overflow-hidden rounded-[24px] border border-white/10 bg-[#111111] transition duration-300 hover:-translate-y-1 hover:border-white/25"
               >
-                <div className="relative h-64">
+                <div className="relative h-44">
                   <Image
                     src={category.image}
                     alt={category.title}
                     fill
-                    className="object-cover transition duration-700 group-hover:scale-[1.03]"
+                    className="object-cover transition duration-700 group-hover:scale-105"
                   />
 
-                  <div className="absolute inset-0 bg-black/40" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-black/10 to-black/20" />
                 </div>
 
                 <div className="p-5">

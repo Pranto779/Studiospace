@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable react-hooks/static-components */
 
 import { useState } from "react";
 import Link from "next/link";
@@ -13,7 +14,6 @@ import {
   X,
   LayoutDashboard,
   LogOut,
-  UserRound,
   ChevronDown,
   PlusCircle,
   Building2,
@@ -45,7 +45,7 @@ export default function Navbar() {
     setIsOpen(false);
   };
 
-  const avatarLetter = user?.name?.trim()?.charAt(0)?.toUpperCase() || "U";
+  const avatarLetter = user?.name?.trim().charAt(0).toUpperCase() || "U";
 
   // Profile Loading Skeleton
   const UserSkeleton = ({
@@ -92,79 +92,67 @@ export default function Navbar() {
 
   // Profile menu
   const ProfileMenu = () => (
-  <div className="absolute right-0 top-full z-50 mt-3 w-72 overflow-hidden rounded-2xl border border-white/10 bg-[#141414] p-2 shadow-2xl">
-    {/* User Info */}
-    <div className="flex items-center gap-3 border-b border-white/10 px-3 py-3">
-      <UserAvatar />
+    <div className="absolute right-0 top-full z-50 mt-3 w-72 overflow-hidden rounded-2xl border border-white/10 bg-[#141414] p-2 shadow-2xl">
+      <div className="flex items-center gap-3 border-b border-white/10 px-3 py-3">
+        <UserAvatar />
 
-      <div className="min-w-0">
-        <p className="truncate text-sm font-semibold text-white">
-          {user?.name}
-        </p>
+        <div className="min-w-0">
+          <p className="truncate text-sm font-semibold text-white">
+            {user?.name}
+          </p>
 
-        <p className="truncate text-xs text-zinc-500">
-          {user?.email}
-        </p>
+          <p className="truncate text-xs text-zinc-500">{user?.email}</p>
+        </div>
       </div>
+
+      <Link
+        href="/dashboard"
+        onClick={() => setProfileOpen(false)}
+        className="mt-2 flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-zinc-300 transition-colors hover:bg-white/[0.07] hover:text-white"
+      >
+        <LayoutDashboard size={17} />
+        Dashboard
+        <ArrowUpRight size={15} className="ml-auto" />
+      </Link>
+
+      <Link
+        href="/add-studio"
+        onClick={() => setProfileOpen(false)}
+        className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-zinc-300 transition-colors hover:bg-white/[0.07] hover:text-white"
+      >
+        <PlusCircle size={17} />
+        Add New Studio
+      </Link>
+
+      <Link
+        href="/my-listings"
+        onClick={() => setProfileOpen(false)}
+        className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-zinc-300 transition-colors hover:bg-white/[0.07] hover:text-white"
+      >
+        <Building2 size={17} />
+        My Studio Listings
+      </Link>
+
+      <Link
+        href="/my-bookings"
+        onClick={() => setProfileOpen(false)}
+        className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-zinc-300 transition-colors hover:bg-white/[0.07] hover:text-white"
+      >
+        <CalendarDays size={17} />
+        My Bookings
+      </Link>
+
+      <div className="my-2 border-t border-white/10" />
+
+      <button
+        onClick={handleLogout}
+        className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm text-red-400 transition-colors hover:bg-red-500/10"
+      >
+        <LogOut size={17} />
+        Logout
+      </button>
     </div>
-
-    <Link
-      href="/dashboard"
-      onClick={() => setProfileOpen(false)}
-      className="mt-2 flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-zinc-300 transition-colors hover:bg-white/[0.07] hover:text-white"
-    >
-      <LayoutDashboard size={17} />
-      Dashboard
-      <ArrowUpRight size={15} className="ml-auto" />
-    </Link>
-
-    <Link
-      href="/add-studio"
-      onClick={() => setProfileOpen(false)}
-      className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-zinc-300 transition-colors hover:bg-white/[0.07] hover:text-white"
-    >
-      <PlusCircle size={17} />
-      Add New Studio
-    </Link>
-
-    <Link
-      href="/my-listings"
-      onClick={() => setProfileOpen(false)}
-      className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-zinc-300 transition-colors hover:bg-white/[0.07] hover:text-white"
-    >
-      <Building2 size={17} />
-      My Studio Listings
-    </Link>
-
-    <Link
-      href="/my-bookings"
-      onClick={() => setProfileOpen(false)}
-      className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-zinc-300 transition-colors hover:bg-white/[0.07] hover:text-white"
-    >
-      <CalendarDays size={17} />
-      My Bookings
-    </Link>
-
-    <Link
-      href="/profile"
-      onClick={() => setProfileOpen(false)}
-      className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-zinc-300 transition-colors hover:bg-white/[0.07] hover:text-white"
-    >
-      <UserRound size={17} />
-      My Profile
-    </Link>
-
-    <div className="my-2 border-t border-white/10" />
-
-    <button
-      onClick={handleLogout}
-      className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm text-red-400 transition-colors hover:bg-red-500/10"
-    >
-      <LogOut size={17} />
-      Logout
-    </button>
-  </div>
-);
+  );
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/[0.08] bg-black/95 text-white backdrop-blur-xl">
@@ -198,26 +186,26 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-        <div className="hidden items-center gap-1 rounded-full border border-white/[0.08] bg-white/[0.03] p-1.5 lg:flex">
-  {navLinks.map(({ name, href, icon: Icon }) => (
-    <Link
-      key={name}
-      href={href}
-      className={`group flex items-center gap-2 rounded-full px-4 py-2.5 text-[12px] font-medium transition-all duration-300 xl:px-5 ${
-        pathname === href
-          ? "bg-white text-black"
-          : "text-zinc-400 hover:bg-white/[0.08] hover:text-white"
-      }`}
-    >
-      <Icon
-        size={15}
-        strokeWidth={1.7}
-        className="transition-transform duration-300 group-hover:scale-110"
-      />
-      {name}
-    </Link>
-  ))}
-</div>
+          <div className="hidden items-center gap-1 rounded-full border border-white/[0.08] bg-white/[0.03] p-1.5 lg:flex">
+            {navLinks.map(({ name, href, icon: Icon }) => (
+              <Link
+                key={name}
+                href={href}
+                className={`group flex items-center gap-2 rounded-full px-4 py-2.5 text-[12px] font-medium transition-all duration-300 xl:px-5 ${
+                  pathname === href
+                    ? "bg-white text-black"
+                    : "text-zinc-400 hover:bg-white/[0.08] hover:text-white"
+                }`}
+              >
+                <Icon
+                  size={15}
+                  strokeWidth={1.7}
+                  className="transition-transform duration-300 group-hover:scale-110"
+                />
+                {name}
+              </Link>
+            ))}
+          </div>
 
           {/* Desktop Actions */}
           <div className="hidden items-center gap-5 sm:flex">
