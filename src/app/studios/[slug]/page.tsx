@@ -27,7 +27,7 @@ interface DetailsPageProps {
 const DetailsPage = async ({ params }: DetailsPageProps) => {
   const { slug } = await params;
   const token = await getTokenserver();
-  const res = await fetch(`http://localhost:8000/studios/${slug}`, {
+  const res = await fetch(`${process.env.SERVER_BASE_URL}/studios/${slug}`, {
     cache: "no-store",
     headers: token ? { authorization: `Bearer ${token}` } : {},
   });

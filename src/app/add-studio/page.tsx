@@ -80,7 +80,7 @@ export default function AddStudioPage() {
     try {
       setLoading(true);
 
-      const res = await fetch("http://localhost:8000/add-studio", {
+      const res = await fetch(`${process.env.SERVER_BASE_URL}/add-studio`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -184,7 +184,6 @@ export default function AddStudioPage() {
                 <option value="Film Stage">Film Stage</option>
                 <option value="Podcast Lounge">Podcast Lounge</option>
                 <option value="Music Suite">Music Suite</option>
-                <option value="Workshop">Workshop</option>
                 <option value="Sound Stage">Sound Stage</option>
               </select>
             </div>
@@ -385,4 +384,3 @@ export default function AddStudioPage() {
     </main>
   );
 }
-

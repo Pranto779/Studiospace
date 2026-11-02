@@ -1,15 +1,31 @@
 "use client";
 
+import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { Aperture } from "lucide-react";
 import { FaInstagram, FaLinkedin, FaYoutube } from "react-icons/fa";
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const subscribe = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!email.trim()) {
+      setMessage("Please enter your email.");
+      return;
+    }
+
+    localStorage.setItem("studiospace-newsletter-email", email.trim());
+    setMessage("Thanks! Your email has been saved.");
+    setEmail("");
+  };
+
   return (
     <footer className="border-t border-white/10 bg-[#080808] text-white">
       <div className="mx-auto max-w-7xl px-6 py-10">
         <div className="grid gap-10 lg:grid-cols-3">
-          {/* Brand */}
           <div>
             <div className="flex items-center gap-3">
               <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03]">
@@ -37,7 +53,6 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Links */}
           <div>
             <h3 className="mb-4 font-semibold">
               Quick Links
@@ -65,16 +80,18 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Newsletter */}
           <div>
             <h3 className="mb-4 font-semibold">
               Stay Updated
             </h3>
 
-            <div className="flex gap-2">
+            <form className="flex gap-2" onSubmit={subscribe}>
               <input
                 type="email"
                 placeholder="Your email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                required
                 className="
                   h-11
                   flex-1
@@ -89,6 +106,7 @@ export default function Footer() {
               />
 
               <button
+                type="submit"
                 className="
                   rounded-xl
                   bg-white
@@ -102,48 +120,26 @@ export default function Footer() {
               >
                 Join
               </button>
-            </div>
-
-            {/* Social */}
+            </form>
+            {message && (
+              <p className="mt-3 text-sm text-zinc-400" role="status">
+                {message}
+              </p>
+            )}
             <div className="mt-5 flex gap-2">
-              <Link
-                href="#"
-                className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] transition hover:bg-white hover:text-black"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="h-4 w-4"
-                >
-                  <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.847h-7.406l-5.8-7.584-6.64 7.584H.474l8.6-9.83L0 1.153h7.594l5.243 6.932L18.901 1.153z" />
-                </svg>
-              </Link>
-
-              <Link
-                href="#"
-                className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] transition hover:bg-white hover:text-black"
-              >
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03]">
                 <FaInstagram size={16} />
-              </Link>
-
-              <Link
-                href="#"
-                className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] transition hover:bg-white hover:text-black"
-              >
+              </span>
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03]">
                 <FaLinkedin size={16} />
-              </Link>
-
-              <Link
-                href="#"
-                className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] transition hover:bg-white hover:text-black"
-              >
+              </span>
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03]">
                 <FaYoutube size={16} />
-              </Link>
+              </span>
             </div>
           </div>
         </div>
 
-        {/* Bottom */}
         <div className="mt-10 flex flex-col gap-3 border-t border-white/10 pt-6 text-sm text-zinc-500 md:flex-row md:items-center md:justify-between">
           <p>
             © {new Date().getFullYear()} StudioSpace. All rights reserved.

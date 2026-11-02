@@ -1,7 +1,7 @@
 import FeaturedStudios, { Istudio } from "./FeaturedStudios";
 
 const Feature = async () => {
-  const res = await fetch("http://localhost:8000/features");
+  const res = await fetch(`${process.env.SERVER_BASE_URL}/features`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch studios");

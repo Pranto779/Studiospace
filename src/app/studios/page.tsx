@@ -9,7 +9,7 @@ const Studio = async ({
   const { category } = await searchParams;
 
   const res = await fetch(
-    `http://localhost:8000/studios?category=${encodeURIComponent(category || "")}`,
+    `${process.env.BASE_URL}/studios?category=${encodeURIComponent(category || "")}`,
     { cache: "no-store" }
   );
 

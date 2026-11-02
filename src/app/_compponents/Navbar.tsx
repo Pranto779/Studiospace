@@ -47,7 +47,6 @@ export default function Navbar() {
 
   const avatarLetter = user?.name?.trim().charAt(0).toUpperCase() || "U";
 
-  // Profile Loading Skeleton
   const UserSkeleton = ({
     size = "normal",
   }: {
@@ -69,7 +68,6 @@ export default function Navbar() {
     </div>
   );
 
-  // User avatar
   const UserAvatar = ({ size = "normal" }: { size?: "normal" | "small" }) => (
     <div
       className={`flex shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/15 bg-white/10 font-semibold text-white ${
@@ -90,7 +88,6 @@ export default function Navbar() {
     </div>
   );
 
-  // Profile menu
   const ProfileMenu = () => (
     <div className="absolute right-0 top-full z-50 mt-3 w-72 overflow-hidden rounded-2xl border border-white/10 bg-[#141414] p-2 shadow-2xl">
       <div className="flex items-center gap-3 border-b border-white/10 px-3 py-3">

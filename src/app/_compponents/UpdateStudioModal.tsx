@@ -39,7 +39,6 @@ const categories = [
   "Film Stage",
   "Podcast Lounge",
   "Music Suite",
-  "Workshop",
   "Sound Stage",
 ];
 
@@ -56,7 +55,7 @@ const amenityOptions = [
 
 export default function UpdateStudioModal({
   studio,
-  updateEndpoint = `http://localhost:8000/listing/${encodeURIComponent(studio._id)}`,
+  updateEndpoint = `${process.env.SERVER_BASE_URL}/listing/${encodeURIComponent(studio._id)}`,
   onClose,
   onUpdated,
 }: UpdateStudioModalProps) {

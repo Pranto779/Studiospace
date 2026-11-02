@@ -45,7 +45,7 @@ export default function MyListingsPage() {
 
       try {
         const response = await fetch(
-          `http://localhost:8000/listing/${encodeURIComponent(email)}`,{
+          `${process.env.SERVER_BASE_URL}/listing/${encodeURIComponent(email)}`,{
             headers:{
               authorization:`Bearer ${token}`
             }

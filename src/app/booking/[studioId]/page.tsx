@@ -24,7 +24,7 @@ export default function DynamicBookingPage() {
         }
 
         const response = await fetch(
-          `http://localhost:8000/studios/${params.studioId}`,
+          `${process.env.SERVER_BASE_URL}/studios/${params.studioId}`,
           {
             cache: "no-store",
             headers: {

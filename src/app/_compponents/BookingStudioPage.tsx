@@ -71,7 +71,7 @@ export default function BookingStudioPage({
     setSubmitting(true);
     const toastId = toast.loading("Submitting your booking...");
     try {
-      const response = await fetch("http://localhost:8000/mybookCollection", {
+      const response = await fetch(`${process.env.SERVER_BASE_URL}/mybookCollection`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(booking),

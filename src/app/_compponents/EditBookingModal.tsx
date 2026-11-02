@@ -44,7 +44,7 @@ export default function EditBookingModal({
 
     try {
       const response = await fetch(
-        `http://localhost:8000/mybooking/${encodeURIComponent(booking._id)}`,
+        `${process.env.SERVER_BASE_URL}/mybooking/${encodeURIComponent(booking._id)}`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
