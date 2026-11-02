@@ -29,6 +29,7 @@ export interface EditableStudio {
 
 interface UpdateStudioModalProps {
   studio: EditableStudio;
+  updateEndpoint?: string;
   onClose: () => void;
   onUpdated: (studio: EditableStudio) => void;
 }
@@ -55,6 +56,7 @@ const amenityOptions = [
 
 export default function UpdateStudioModal({
   studio,
+  updateEndpoint = `http://localhost:8000/listing/${encodeURIComponent(studio._id)}`,
   onClose,
   onUpdated,
 }: UpdateStudioModalProps) {
@@ -118,7 +120,7 @@ export default function UpdateStudioModal({
 
     try {
       const response = await fetch(
-        `http://localhost:8000/listing/${encodeURIComponent(studio._id)}`,
+        updateEndpoint,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },

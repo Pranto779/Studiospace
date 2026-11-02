@@ -16,6 +16,7 @@ import {
   Search,
 } from "lucide-react";
 import { authClient } from "../lib/auth-client";
+import { gettokenclient } from "@/hooks/gettokenClient";
 
 interface Studio {
   _id: string;
@@ -50,12 +51,19 @@ export default function DashboardPage() {
     setError("");
 
     try {
+      const token = await gettokenclient();
+      const headers: Record<string, string> = token
+        ? { authorization: `Bearer ${token}` }
+        : {};
+
       const [studioResponse, bookingResponse] = await Promise.all([
         fetch(`http://localhost:8000/listing/${encodeURIComponent(email)}`, {
           cache: "no-store",
+          headers,
         }),
         fetch("http://localhost:8000/mybooking", {
           cache: "no-store",
+          headers,
         }),
       ]);
 

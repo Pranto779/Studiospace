@@ -21,6 +21,6 @@ export const config = {
     "/booking/:path*",
     "/add-studio",
     "/dashboard/:path*",
-    "/studios/:path*",
+    "/studios/:id",
   ],
 };

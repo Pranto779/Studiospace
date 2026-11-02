@@ -1,4 +1,5 @@
 import { Istudio } from "@/app/_compponents/FeaturedStudios";
+import { getTokenserver } from "@/hooks/gettokenfromserver";
 import {
   MapPin,
   Clock,
@@ -15,6 +16,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import EditStudioButton from "@/app/_compponents/EditStudioButton";
 
 interface DetailsPageProps {
   params: Promise<{
@@ -24,9 +26,10 @@ interface DetailsPageProps {
 
 const DetailsPage = async ({ params }: DetailsPageProps) => {
   const { slug } = await params;
-
+  const token = await getTokenserver();
   const res = await fetch(`http://localhost:8000/studios/${slug}`, {
     cache: "no-store",
+    headers: token ? { authorization: `Bearer ${token}` } : {},
   });
 
   if (!res.ok) {
@@ -54,6 +57,7 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
     maxCapacity?: number;
     hostName?: string;
     hostEmail?: string;
+    email?: string;
     gallery?: string[];
     reviews?: {
       _id?: string;
@@ -75,6 +79,10 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
     : typeof data.amenities === "string"
       ? data.amenities.split(",").map((item) => item.trim()).filter(Boolean)
       : [];
+  const editableStudio = {
+    ...data,
+    email: data.email || data.hostEmail || "",
+  };
 
   return (
     <main className="min-h-screen bg-[#080808] text-white">
@@ -104,15 +112,18 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-[#111111] px-5 py-4">
-            <p className="text-xs text-zinc-500">Hourly Rate</p>
-            <p className="mt-1 text-3xl font-semibold">
-              ${data.hourlyRate}
-              <span className="text-sm font-normal text-zinc-500">
-                {" "}
-                / hour
-              </span>
-            </p>
+          <div className="flex items-center gap-3">
+            <div className="rounded-2xl border border-white/10 bg-[#111111] px-5 py-4">
+              <p className="text-xs text-zinc-500">Hourly Rate</p>
+              <p className="mt-1 text-3xl font-semibold">
+                ${data.hourlyRate}
+                <span className="text-sm font-normal text-zinc-500">
+                  {" "}
+                  / hour
+                </span>
+              </p>
+            </div>
+            <EditStudioButton studio={editableStudio} />
           </div>
         </div>
       </section>

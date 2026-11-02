@@ -51,6 +51,8 @@ export default function AddStudioPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+
+
     if (isPending) {
       toast.error("Please wait while your session loads.");
       return;
@@ -82,6 +84,7 @@ export default function AddStudioPage() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          
         },
         body: JSON.stringify(studioData),
       });

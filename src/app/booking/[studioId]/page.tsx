@@ -3,31 +3,53 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { toast } from "sonner";
-import BookingStudioPage, { BookingStudio } from "../../_compponents/BookingStudioPage";
+import BookingStudioPage, {
+  BookingStudio,
+} from "../../_compponents/BookingStudioPage";
+import { authClient } from "@/app/lib/auth-client";
 
 export default function DynamicBookingPage() {
   const params = useParams<{ studioId: string }>();
+
   const [studio, setStudio] = useState<BookingStudio | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadStudio = async () => {
       try {
+        const { data, error } = await authClient.token();
+
+        if (error || !data?.token) {
+          throw new Error("Authentication token unavailable");
+        }
+
         const response = await fetch(
           `http://localhost:8000/studios/${params.studioId}`,
-          { cache: "no-store" }
+          {
+            cache: "no-store",
+            headers: {
+              Authorization: `Bearer ${data.token}`,
+            },
+          }
         );
 
-        if (!response.ok) throw new Error("Studio unavailable");
-        setStudio((await response.json()) as BookingStudio);
-      } catch {
+        if (!response.ok) {
+          throw new Error("Studio unavailable");
+        }
+
+        const result = (await response.json()) as BookingStudio;
+        setStudio(result);
+      } catch (error) {
+        console.error(error);
         toast.error("Could not load this studio.");
       } finally {
         setLoading(false);
       }
     };
 
-    if (params.studioId) void loadStudio();
+    if (params.studioId) {
+      void loadStudio();
+    }
   }, [params.studioId]);
 
   if (loading) {
@@ -40,3 +62,4 @@ export default function DynamicBookingPage() {
 
   return <BookingStudioPage studio={studio} />;
 }
+

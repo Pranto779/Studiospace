@@ -63,10 +63,11 @@ export default function BookingStudioPage({
       startTime: String(formData.get("startTime")),
       hours: Number(formData.get("hours")),
       totalPrice: (Number(studio.hourlyRate) || 0) * Number(formData.get("hours")),
-      status: "Confirmed",
+      status: "Pending",
     };
 
     setSubmitting(true);
+    const toastId = toast.loading("Submitting your booking...");
     try {
       const response = await fetch("http://localhost:8000/mybookCollection", {
         method: "POST",
@@ -95,9 +96,11 @@ export default function BookingStudioPage({
         );
       }
 
+      toast.dismiss(toastId);
       toast.success("Reservation submitted successfully.");
       router.push("/my-bookings");
     } catch {
+      toast.dismiss(toastId);
       toast.error("Could not create your reservation. Please try again.");
     } finally {
       setSubmitting(false);
