@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -20,6 +20,8 @@ export interface BookingStudio {
   hourlyRate?: number | string;
   image?: string;
 }
+
+const durationOptions = [1, 2, 3, 4, 5, 6, 7, 8];
 
 export default function BookingStudioPage({
   studio,
@@ -78,24 +80,12 @@ export default function BookingStudioPage({
 
       const result = await response.json().catch(() => null);
       const createdBooking = { ...booking, _id: `${studio._id}-${Date.now()}` };
+      const newBooking =
+        result && typeof result === "object"
+          ? { ...createdBooking, ...result, savedAt: Date.now() }
+          : { ...createdBooking, savedAt: Date.now() };
 
-      if (result && typeof result === "object") {
-        const responseData = result as Record<string, unknown>;
-        sessionStorage.setItem(
-          "studiospace_new_booking",
-          JSON.stringify({
-            ...createdBooking,
-            ...responseData,
-            savedAt: Date.now(),
-          })
-        );
-      } else {
-        sessionStorage.setItem(
-          "studiospace_new_booking",
-          JSON.stringify({ ...createdBooking, savedAt: Date.now() })
-        );
-      }
-
+      sessionStorage.setItem("studiospace_new_booking", JSON.stringify(newBooking));
       toast.dismiss(toastId);
       toast.success("Reservation submitted successfully.");
       router.push("/my-bookings");
@@ -144,7 +134,7 @@ export default function BookingStudioPage({
                 <div className="mt-2 flex h-12 items-center gap-3 rounded-xl border border-white/10 bg-black px-4">
                   <Clock3 size={17} className="text-zinc-500" />
                   <select required name="hours" defaultValue="1" className="w-full bg-transparent outline-none">
-                    {[1, 2, 3, 4, 5, 6, 7, 8].map((hours) => (
+                    {durationOptions.map((hours) => (
                       <option key={hours} value={hours} className="bg-black">
                         {hours} {hours === 1 ? "hour" : "hours"}
                       </option>
