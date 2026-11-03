@@ -9,7 +9,7 @@ const Studio = async ({
   const { category } = await searchParams;
 
   const res = await fetch(
-    `${process.env.SERVER_BASE_URL}/studios?category=${encodeURIComponent(category || "")}`,
+    `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/studios?category=${encodeURIComponent(category || "")}`,
     { cache: "no-store" }
   );
 
@@ -49,4 +49,3 @@ const Studio = async ({
 };
 
 export default Studio;
-

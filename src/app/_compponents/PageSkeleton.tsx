@@ -2,7 +2,7 @@ export default function PageSkeleton() {
   return (
     <main className="min-h-screen bg-[#080808] px-4 py-12 text-white sm:px-6 lg:px-10">
       <div className="mx-auto max-w-7xl animate-pulse">
-        <div className="h-4 w-32 rounded bg-white/10" />
+        <div className="h-4 w-30 rounded bg-white/10" />
         <div className="mt-5 h-12 w-80 max-w-full rounded-xl bg-white/10" />
         <div className="mt-4 h-5 w-full max-w-xl rounded bg-white/[0.06]" />
 

@@ -143,9 +143,10 @@ export default function MyBookingsPage() {
     setError("");
 
     try {
+      const token = await gettokenclient();
       const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/mybooking`, {
         cache: "no-store",
-  
+        headers: token ? { authorization: `Bearer ${token}` } : {},
       });
       if (!response.ok) throw new Error("Unable to load bookings");
       const data: unknown = await response.json();
