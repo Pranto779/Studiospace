@@ -25,7 +25,7 @@ export default function DeleteStudioModal({
 
     try {
       const response = await fetch(
-        `${process.env.SERVER_BASE_URL}/listing/${studio._id}`,
+        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/listing/${studio._id}`,
         { method: "DELETE" }
       );
 

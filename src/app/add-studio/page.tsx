@@ -60,7 +60,7 @@ export default function AddStudioPage() {
 
     if (!userEmail) {
       toast.error("Please sign in before publishing a studio.");
-      router.push("/sign-in");
+      router.push("/signin");
       return;
     }
 
@@ -80,7 +80,7 @@ export default function AddStudioPage() {
     try {
       setLoading(true);
 
-      const res = await fetch(`${process.env.SERVER_BASE_URL}/add-studio`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/add-studio`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

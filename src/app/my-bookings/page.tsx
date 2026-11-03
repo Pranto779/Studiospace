@@ -93,7 +93,7 @@ const addStudioImages = async (bookings: Booking[]) => {
   }
 
   try {
-    const response = await fetch(`${process.env.SERVER_BASE_URL}/studios`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/studios`, {
       cache: "no-store",
     });
     if (!response.ok) return bookings;
@@ -143,7 +143,7 @@ export default function MyBookingsPage() {
     setError("");
 
     try {
-      const response = await fetch(`${process.env.SERVER_BASE_URL}/mybooking`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/mybooking`, {
         cache: "no-store",
   
       });
@@ -167,7 +167,7 @@ export default function MyBookingsPage() {
     const fetchBookings = async () => {
       const token=await gettokenclient()
       try {
-        const response = await fetch(`${process.env.SERVER_BASE_URL}/mybooking`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/mybooking`, {
           cache: "no-store",
           headers:{
             authorization:`Bearer ${token}`

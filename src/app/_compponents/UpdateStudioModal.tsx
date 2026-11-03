@@ -55,7 +55,7 @@ const amenityOptions = [
 
 export default function UpdateStudioModal({
   studio,
-  updateEndpoint = `${process.env.SERVER_BASE_URL}/listing/${encodeURIComponent(studio._id)}`,
+  updateEndpoint = `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/listing/${encodeURIComponent(studio._id)}`,
   onClose,
   onUpdated,
 }: UpdateStudioModalProps) {

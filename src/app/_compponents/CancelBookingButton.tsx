@@ -20,7 +20,7 @@ export default function CancelBookingButton({
 
     try {
       const response = await fetch(
-        `${process.env.SERVER_BASE_URL}/mybooking/${bookingId}`,
+        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/mybooking/${bookingId}`,
         { method: "DELETE" }
       );
 

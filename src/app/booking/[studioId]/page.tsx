@@ -24,7 +24,7 @@ export default function DynamicBookingPage() {
         }
 
         const response = await fetch(
-          `${process.env.SERVER_BASE_URL}/studios/${params.studioId}`,
+          `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/studios/${params.studioId}`,
           {
             cache: "no-store",
             headers: {
@@ -62,4 +62,3 @@ export default function DynamicBookingPage() {
 
   return <BookingStudioPage studio={studio} />;
 }
-

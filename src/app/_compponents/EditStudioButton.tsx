@@ -29,7 +29,7 @@ export default function EditStudioButton({ studio }: EditStudioButtonProps) {
       {editing && (
         <UpdateStudioModal
           studio={studio}
-          updateEndpoint={`${process.env.SERVER_BASE_URL}/studios/${encodeURIComponent(studio._id)}`}
+          updateEndpoint={`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/studios/${encodeURIComponent(studio._id)}`}
           onClose={() => setEditing(false)}
           onUpdated={() => router.push("/my-listings")}
         />

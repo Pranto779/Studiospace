@@ -57,11 +57,11 @@ export default function DashboardPage() {
         : {};
 
       const [studioResponse, bookingResponse] = await Promise.all([
-        fetch(`${process.env.SERVER_BASE_URL}/listing/${encodeURIComponent(email)}`, {
+        fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/listing/${encodeURIComponent(email)}`, {
           cache: "no-store",
           headers,
         }),
-        fetch(`${process.env.SERVER_BASE_URL}/mybooking`, {
+        fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/mybooking`, {
           cache: "no-store",
           headers,
         }),
