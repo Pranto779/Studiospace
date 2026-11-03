@@ -36,10 +36,10 @@ interface UpdateStudioModalProps {
 
 const categories = [
   "Photo Studio",
-  "Film Stage",
-  "Podcast Lounge",
-  "Music Suite",
   "Sound Stage",
+  "Podcast Room",
+  "Music Suite",
+  "Art Workshop",
 ];
 
 const amenityOptions = [

@@ -181,10 +181,10 @@ export default function AddStudioPage() {
               >
                 <option value="">Select Category</option>
                 <option value="Photo Studio">Photo Studio</option>
-                <option value="Film Stage">Film Stage</option>
-                <option value="Podcast Lounge">Podcast Lounge</option>
-                <option value="Music Suite">Music Suite</option>
                 <option value="Sound Stage">Sound Stage</option>
+                <option value="Podcast Room">Podcast Room</option>
+                <option value="Music Suite">Music Suite</option>
+                <option value="Art Workshop">Art Workshop</option>
               </select>
             </div>
 
