@@ -77,6 +77,13 @@ export default function Footer() {
                 About Us
               </Link>
 
+              <Link
+                href="/how-it-works"
+                className="block hover:text-white"
+              >
+                How It Works
+              </Link>
+
             </div>
           </div>
 
