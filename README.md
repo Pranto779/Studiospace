@@ -151,15 +151,8 @@ cd your-client-folder
 npm install
 2. Add environment variables
 
-Create a .env.local file in the client project and add the required
-values:
+Create a .env.local file in the client project and add the require
 
-SERVER_BASE_URL=http://localhost:8000
-BETTER_AUTH_SECRET=your_secret_key
-BETTER_AUTH_URL=http://localhost:3000
-MONGO_URI=your_mongodb_connection_string
-GOOGLE_CLIENT_ID=your_google_client_id
-GOOGLE_CLIENT_SECRET=your_google_client_secret
 
 Use the variable names required by your code. Never upload real
 passwords, API secrets, or database credentials to GitHub.
@@ -189,7 +182,8 @@ Open another terminal in the client project and run:
 
 npm run dev
 
-Open http://localhost:3000 in your browser.
+Open https://studiospace-pt1p.vercel.app
+ in your browser.
 
 Database
 
