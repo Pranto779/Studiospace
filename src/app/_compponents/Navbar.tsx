@@ -23,6 +23,7 @@ import {
 import { usePathname } from "next/navigation";
 import { authClient } from "../lib/auth-client";
 import Image from "next/image";
+import { toast } from "sonner";
 
 const navLinks = [
   { name: "Home", href: "/", icon: House },
@@ -40,9 +41,14 @@ export default function Navbar() {
   const user = session?.user;
 
   const handleLogout = async () => {
-    await authClient.signOut();
-    setProfileOpen(false);
-    setIsOpen(false);
+    try {
+      await authClient.signOut();
+      setProfileOpen(false);
+      setIsOpen(false);
+      toast.success("Logged out successfully!");
+    } catch {
+      toast.error("Could not log out. Please try again.");
+    }
   };
 
   const avatarLetter = user?.name?.trim().charAt(0).toUpperCase() || "U";

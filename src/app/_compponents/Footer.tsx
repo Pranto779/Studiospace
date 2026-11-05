@@ -4,21 +4,21 @@ import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { Aperture } from "lucide-react";
 import { FaInstagram, FaLinkedin, FaYoutube } from "react-icons/fa";
+import { toast } from "sonner";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
 
   const subscribe = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!email.trim()) {
-      setMessage("Please enter your email.");
+      toast.error("Please enter your email.");
       return;
     }
 
     localStorage.setItem("studiospace-newsletter-email", email.trim());
-    setMessage("Thanks! Your email has been saved.");
+    toast.success("Thanks! Your email has been saved.");
     setEmail("");
   };
 
@@ -128,11 +128,6 @@ export default function Footer() {
                 Join
               </button>
             </form>
-            {message && (
-              <p className="mt-3 text-sm text-zinc-400" role="status">
-                {message}
-              </p>
-            )}
             <div className="mt-5 flex gap-2">
               <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03]">
                 <FaInstagram size={16} />
